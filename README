@@ -1,0 +1,17 @@
+This is a kubernetes pods metrics exporter for prometheus that, given a label name and value, will output the number of pods and their phase matching the given label.
+
+This is useful for monitoring the state of pods in a kuberenetes cluster for anomalies and alerting if pods are not in the desired state.
+
+To build, run, and test this monitor, you will need a functioning go environment, docker, and a local kubernetes cluster.
+For the local kubernetes cluster k3d is recommended.
+
+See https://go.dev/ for documentation on how to setup go in your environment.
+See https://docs.docker.com/get-docker/ for documentation on how to install docker in your environment.
+See https://k3d.io/v5.4.1/#installation for documentation on installing k3d in your environment.
+
+Once you have go, docker, and k3d installed, you can either look at setup.sh in the scripts directory and mimic what it does or run it as "bash setup.sh" to setup a test environment.
+
+To run the metrics exporter, execute "go run main.go". There will be some output describing what is going on during startup, and then it will output the pod names and their namespaces that match the labels every 10 seconds.
+
+To query the metrics, you can execute "curl localhost:8080/metrics | grep pod_count".
+
